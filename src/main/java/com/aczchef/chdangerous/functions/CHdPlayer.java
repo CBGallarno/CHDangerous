@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.brothercraft.chdangerous.functions;
+package com.aczchef.chdangerous.functions;
 
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.abstraction.MCPlayer;

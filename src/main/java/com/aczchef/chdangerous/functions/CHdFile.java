@@ -1,4 +1,4 @@
-package com.brothercraft.chdangerous.functions;
+package com.aczchef.chdangerous.functions;
 
 import com.laytonsmith.PureUtilities.Common.FileUtil;
 import com.laytonsmith.PureUtilities.Version;
