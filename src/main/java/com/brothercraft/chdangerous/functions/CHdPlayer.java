@@ -68,7 +68,7 @@ public class CHdPlayer {
 		}
 	    }
 	    if (target == null) {
-		return new CNull(t);
+		return CNull.NULL;
 	    } else {
 		return new CInt(target.getEntityId(), t);
 	    }
