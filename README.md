@@ -1,5 +1,9 @@
 #CHDangerous
 
+####WARNING!
+CHDangerous contains functions that if used incorrectly can ruin your life. PLEASE make sure you know what you are
+doing. ANY DAMAGE DONE IS SOLEY THE RESPONSIBILITY OF THE SERVER OWNER / MAINTAINER. ANYTHING CONTAINED IN THIS
+EXTENSION IS NOT GUARANTEED TO EVEN DO WHAT IT WAS DESIGNED TO DO.
 
 # Functions
 ## Void chd\_delete(File):
