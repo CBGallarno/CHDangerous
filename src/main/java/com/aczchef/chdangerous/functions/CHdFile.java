@@ -10,9 +10,12 @@ import com.laytonsmith.core.constructs.CVoid;
 import com.laytonsmith.core.constructs.Construct;
 import com.laytonsmith.core.constructs.Target;
 import com.laytonsmith.core.environments.Environment;
+import com.laytonsmith.core.exceptions.CRE.CREFormatException;
+import com.laytonsmith.core.exceptions.CRE.CREIOException;
+import com.laytonsmith.core.exceptions.CRE.CRESecurityException;
+import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
-import com.laytonsmith.core.functions.Exceptions;
 import java.io.File;
 import java.util.logging.Level;
 
@@ -23,8 +26,8 @@ public class CHdFile {
 	@api
 	public static class chd_write extends AbstractFunction {
 
-	public Exceptions.ExceptionType[] thrown() {
-		return new Exceptions.ExceptionType[]{Exceptions.ExceptionType.IOException, Exceptions.ExceptionType.SecurityException, Exceptions.ExceptionType.FormatException};
+	public Class<? extends CREThrowable>[] thrown() {
+		return new Class[]{CREIOException.class, CRESecurityException.class, CREFormatException.class};
 	}
 
 	public boolean isRestricted() {
@@ -46,14 +49,13 @@ public class CHdFile {
 				    mode = 1;
 				}
 			    } else {
-				throw new ConfigRuntimeException("Argument 3 of chd_write is invalid:" + args[3].val(), Exceptions.ExceptionType.FormatException, t);
+				throw new CREFormatException("Argument 3 of chd_write is invalid:" + args[3].val(), t);
 			    }
 			}
 			location = new File(t.file().getParentFile(), location).getAbsolutePath();
 			//Verify this file is not above the craftbukkit directory (or whatever directory the user specified
 			if (!Security.CheckSecurity(location)) {
-				throw new ConfigRuntimeException("You do not have permission to access the file '" + location + "'",
-					Exceptions.ExceptionType.SecurityException, t);
+				throw new CRESecurityException("You do not have permission to access the file '" + location + "'", t);
 			}
 			try {
 			    File file = new File(location);
@@ -62,8 +64,7 @@ public class CHdFile {
 			} catch (Exception ex) {
 				Static.getLogger().log(Level.SEVERE, "Could not write in file while attempting to find " + new File(location).getAbsolutePath()
 					+ "\nFile " + (new File(location).exists() ? "exists" : "does not exist"));
-				throw new ConfigRuntimeException("File could not be written in.",
-					Exceptions.ExceptionType.IOException, t);
+				throw new CREIOException("File could not be written in.", t);
 			}
 		}
 
@@ -89,8 +90,8 @@ public class CHdFile {
     @api
     public static class chd_create extends AbstractFunction {
 
-	public Exceptions.ExceptionType[] thrown() {
-		return new Exceptions.ExceptionType[]{Exceptions.ExceptionType.IOException, Exceptions.ExceptionType.SecurityException};
+	public Class<? extends CREThrowable>[] thrown() {
+		return new Class[]{CREIOException.class, CRESecurityException.class};
 	}
 
 	public boolean isRestricted() {
@@ -106,21 +107,19 @@ public class CHdFile {
 			location = new File(t.file().getParentFile(), location).getAbsolutePath();
 			//Verify this file is not above the craftbukkit directory (or whatever directory the user specified
 			if (!Security.CheckSecurity(location)) {
-				throw new ConfigRuntimeException("You do not have permission to access the file '" + location + "'",
-					Exceptions.ExceptionType.SecurityException, t);
+				throw new CRESecurityException("You do not have permission to access the file '" + location + "'", t);
 			}
 			try {
  			    File file = new File(location);
 			    if(file.exists()) {
-				throw new ConfigRuntimeException(file.getAbsolutePath() + "Already Exists", Exceptions.ExceptionType.IOException, t);
+				throw new CREIOException(file.getAbsolutePath() + "Already Exists", t);
 			    }
 			    FileUtil.write("", file, true);
 			    return CVoid.VOID;
 			} catch (Exception ex) {
 				Static.getLogger().log(Level.SEVERE, "Could not be created while attempting to find " + new File(location).getAbsolutePath()
 					+ "\nFile " + (new File(location).exists() ? "exists" : "does not exist"));
-				throw new ConfigRuntimeException("File could not be created.",
-					Exceptions.ExceptionType.IOException, t);
+				throw new CREIOException("File could not be created.", t);
 			}
 		}
 
@@ -146,8 +145,8 @@ public class CHdFile {
     @api
     public static class chd_delete extends AbstractFunction {
 
-	public Exceptions.ExceptionType[] thrown() {
-		return new Exceptions.ExceptionType[]{Exceptions.ExceptionType.IOException, Exceptions.ExceptionType.SecurityException};
+	public Class<? extends CREThrowable>[] thrown() {
+		return new Class[]{CREIOException.class, CRESecurityException.class};
 	}
 
 	public boolean isRestricted() {
@@ -163,21 +162,19 @@ public class CHdFile {
 			location = new File(t.file().getParentFile(), location).getAbsolutePath();
 			//Verify this file is not above the craftbukkit directory (or whatever directory the user specified
 			if (!Security.CheckSecurity(location)) {
-				throw new ConfigRuntimeException("You do not have permission to access the file '" + location + "'",
-					Exceptions.ExceptionType.SecurityException, t);
+				throw new CRESecurityException("You do not have permission to access the file '" + location + "'", t);
 			}
 			try {
  			    File file = new File(location);
 			    if(!file.exists()) {
-				throw new ConfigRuntimeException(file.getAbsolutePath() + "Doesnt Exist", Exceptions.ExceptionType.IOException, t);
+				throw new CREIOException(file.getAbsolutePath() + "Doesnt Exist", t);
 			    }
 			    FileUtil.recursiveDelete(file);
 			    return CVoid.VOID;
 			} catch (Exception ex) {
 				Static.getLogger().log(Level.SEVERE, "Could not delete the file while attempting to find " + new File(location).getAbsolutePath()
 					+ "\nFile " + (new File(location).exists() ? "exists" : "does not exist"));
-				throw new ConfigRuntimeException("File could not be deleted.",
-					Exceptions.ExceptionType.IOException, t);
+				throw new CREIOException("File could not be deleted.", t);
 			}
 		}
 
