@@ -4,7 +4,7 @@
 
 	<groupId>com.brothercraft</groupId>
 	<artifactId>CHDangerous</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>com.sk89q</groupId>
 			<artifactId>commandhelper</artifactId>
-			<version>3.3.1-SNAPSHOT</version>
+			<version>3.3.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<repositories>

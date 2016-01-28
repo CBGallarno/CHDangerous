@@ -10,7 +10,7 @@ import com.laytonsmith.core.extensions.MSExtension;
 public class LifeCycle extends AbstractExtension {
 
 	public Version getVersion() {
-		return new SimpleVersion(1, 0, 1);
+		return new SimpleVersion(1, 0, 2);
 	}
 
 	@Override

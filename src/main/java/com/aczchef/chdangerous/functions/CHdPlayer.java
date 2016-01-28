@@ -11,9 +11,9 @@ import com.laytonsmith.core.constructs.Construct;
 import com.laytonsmith.core.constructs.Target;
 import com.laytonsmith.core.environments.CommandHelperEnvironment;
 import com.laytonsmith.core.environments.Environment;
+import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
-import com.laytonsmith.core.functions.Exceptions.ExceptionType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -27,7 +27,7 @@ public class CHdPlayer {
     @api
     public static class chd_ptarget extends AbstractFunction {
 
-	public ExceptionType[] thrown() {
+	public Class<? extends CREThrowable>[] thrown() {
 	    throw new UnsupportedOperationException("Not supported yet.");
 	}
 
